@@ -13,6 +13,7 @@
 		DFC846D82A0CD3AD000B9D53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFC846D72A0CD3AD000B9D53 /* Assets.xcassets */; };
 		DFC846DB2A0CD3AD000B9D53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC846D92A0CD3AD000B9D53 /* LaunchScreen.storyboard */; };
 		DFC846E32A0CD505000B9D53 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846E22A0CD505000B9D53 /* TestTableViewCell.swift */; };
+		DFC846E62A0E2C3B000B9D53 /* ExpandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC846E52A0E2C3B000B9D53 /* ExpandTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DFC846DA2A0CD3AD000B9D53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DFC846DC2A0CD3AD000B9D53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFC846E22A0CD505000B9D53 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		DFC846E52A0E2C3B000B9D53 /* ExpandTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				DFC846E42A0CE0CE000B9D53 /* Supporting Files */,
 				DFC846D22A0CD3AB000B9D53 /* ViewController.swift */,
 				DFC846E22A0CD505000B9D53 /* TestTableViewCell.swift */,
+				DFC846E52A0E2C3B000B9D53 /* ExpandTableViewCell.swift */,
 				DFC846DC2A0CD3AD000B9D53 /* Info.plist */,
 			);
 			path = TestTaraTableCell;
@@ -145,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC846E62A0E2C3B000B9D53 /* ExpandTableViewCell.swift in Sources */,
 				DFC846D32A0CD3AB000B9D53 /* ViewController.swift in Sources */,
 				DFC846E32A0CD505000B9D53 /* TestTableViewCell.swift in Sources */,
 				DFC846CF2A0CD3AB000B9D53 /* AppDelegate.swift in Sources */,

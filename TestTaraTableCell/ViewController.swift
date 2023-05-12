@@ -9,13 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var tableView:  UITableView = {
-        var view = UITableView()
-        view.register(TestTableViewCell.self, forCellReuseIdentifier: "testCell")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .clear
-        view.separatorStyle = .none
-        return view
+    private let tableView:  UITableView = {
+        var tableView = UITableView()
+        tableView.register(TestTableViewCell.self, forCellReuseIdentifier: "testCell")
+        tableView.register(ExpandTableViewCell.self, forCellReuseIdentifier: "expandCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
     }()
     
     override func viewDidLoad() {
@@ -35,6 +36,8 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    fileprivate var expandedIndexSet = Set<IndexPath>()
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -43,9 +46,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as? TestTableViewCell {
-                        
-            return cell
+        if expandedIndexSet.contains(indexPath) {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "expandCell", for: indexPath) as? ExpandTableViewCell {
+                            
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as? TestTableViewCell {
+                            
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -57,7 +67,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0;
+        if expandedIndexSet.contains(indexPath) {
+            return 185.0;
+        } else {
+            return 100.0;
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if expandedIndexSet.contains(indexPath) {
+            expandedIndexSet.remove(indexPath)
+        } else {
+            expandedIndexSet.insert(indexPath)
+        }
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 

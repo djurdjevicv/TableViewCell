@@ -8,7 +8,32 @@
 import UIKit
 
 class TestTableViewCell: UITableViewCell {
-        
+    
+    let stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 5.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let collapseStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.spacing = 10.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let labelStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let nameLabel: UILabel = {
         var view = UILabel()
         view.text = "Nick Jonson"
@@ -23,12 +48,12 @@ class TestTableViewCell: UITableViewCell {
         view.text = "May 2, 2023"
         view.font = view.font.withSize(18)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .systemBlue
+        view.textColor = UIColor(named: "blueColor")
         return view
     }()
     
     let avatarImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.image = UIImage(named: "default-avatar")
@@ -61,6 +86,7 @@ class TestTableViewCell: UITableViewCell {
 
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
+        selectionStyle = .none
         
         setupView()
     }
@@ -76,28 +102,33 @@ class TestTableViewCell: UITableViewCell {
     }
                 
     private func setupView() {
+        
+        addSubview(stackView)
+        
+        stackView.addArrangedSubview(collapseStackView)
+        collapseStackView.addArrangedSubview(avatarImage)
+        
+        labelStackView.addArrangedSubview(nameLabel)
+        labelStackView.addArrangedSubview(dateLabel)
+        collapseStackView.addArrangedSubview(labelStackView)
+        collapseStackView.addArrangedSubview(celebrationTypeIcon)
                 
-        addSubview(avatarImage)
-        addSubview(nameLabel)
-        addSubview(dateLabel)
-        addSubview(celebrationTypeIcon)
         addSubview(lentaIcon)
         
         NSLayoutConstraint.activate([
             
-            avatarImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            avatarImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            
             avatarImage.widthAnchor.constraint(equalToConstant: 50),
             avatarImage.heightAnchor.constraint(equalToConstant: 50),
             
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             nameLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
-            
-            dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+
             dateLabel.leadingAnchor.constraint(equalTo: avatarImage.trailingAnchor, constant: 10),
-            
-            celebrationTypeIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            celebrationTypeIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
+
             celebrationTypeIcon.widthAnchor.constraint(equalToConstant: 50),
             celebrationTypeIcon.heightAnchor.constraint(equalToConstant: 50),
             
